@@ -1,0 +1,180 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Annual Returns</title>
+<style>
+  body {
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+  }
+
+  form {
+    width: 80%;
+    margin: auto;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center; /* Center the content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  label {
+    display: inline-block;
+    width: 100px;
+    color: #fff;
+    text-align: left; /* Align the label text to the left */
+    font-weight: bold;
+  }
+
+  input[type="number"] {
+    width: 60px;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+  }
+
+  input[type="submit"] {
+    margin-top: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+
+  #annualSummary {
+    width: 80%;
+    margin: 20px auto;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #333;
+    text-align: center; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .month-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+
+  .month-input {
+    flex: 0 0 45%;
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+
+<h2 style="text-align: center;">Annual Returns</h2>
+
+<form id="annualForm" action="/calculate" method="POST">
+  <label for="year">Year:</label>
+  <input type="number" id="year" name="year" min="2000" max="2023" required><br>
+
+  <hr>
+
+  <!-- Monthly expenses input fields -->
+  <div class="month-container">
+    <div class="month-input">
+      <label for="january">January:</label>
+      <input type="number" id="january" name="january" step="0.01" required><br>
+    </div>
+    <div class="month-input">
+      <label for="february">February:</label>
+      <input type="number" id="february" name="february" step="0.01" required><br>
+    </div>
+    <div class="month-input">
+      <label for="march">March:</label>
+      <input type="number" id="march" name="march" step="0.01" required><br>
+    </div>
+    <div class="month-input">
+      <label for="april">April:</label>
+      <input type="number" id="april" name="april" step="0.01" required><br>
+    </div>
+    <div class="month-input">
+      <label for="may">May:</label>
+      <input type="number" id="may" name="may" step="0.01" required><br>
+    </div>
+    <div class="month-input">
+      <label for="june">June:</label>
+      <input type="number" id="june" name="june" step="0.01" required><br>
+    </div>
+    <div class="month-input">
+      <label for="july">July:</label>
+      <input type="number" id="july" name="july" step="0.01" required><br>
+    </div>
+    <div class="month-input">
+      <label for="august">August:</label>
+      <input type="number" id="august" name="august" step="0.01" required><br>
+    </div>
+    <div class="month-input">
+      <label for="september">September:</label>
+      <input type="number" id="september" name="september" step="0.01" required><br>
+    </div>
+    <div class="month-input">
+      <label for="october">October:</label>
+      <input type="number" id="october" name="october" step="0.01" required><br>
+    </div>
+    <div class="month-input">
+      <label for="november">November:</label>
+      <input type="number" id="november" name="november" step="0.01" required><br>
+    </div>
+    <div class="month-input">
+      <label for="december">December:</label>
+      <input type="number" id="december" name="december" step="0.01" required><br>
+    </div>
+  </div>
+
+  <hr>
+
+  <input type="submit" value="Get Annual Returns">
+</form>
+
+<hr>
+
+<div id="annualSummary"></div>
+
+<script>
+document.getElementById("annualForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+  
+  // Get values
+  var year = parseInt(document.getElementById("year").value);
+  var january = parseFloat(document.getElementById("january").value);
+  var february = parseFloat(document.getElementById("february").value);
+  var march = parseFloat(document.getElementById("march").value);
+  var april = parseFloat(document.getElementById("april").value);
+  var may = parseFloat(document.getElementById("may").value);
+  var june = parseFloat(document.getElementById("june").value);
+  var july = parseFloat(document.getElementById("july").value);
+  var august = parseFloat(document.getElementById("august").value);
+  var september = parseFloat(document.getElementById("september").value);
+  var october = parseFloat(document.getElementById("october").value);
+  var november = parseFloat(document.getElementById("november").value);
+  var december = parseFloat(document.getElementById("december").value);
+  
+  // Calculate annual summary
+  var annualTotal = january + february + march + april + may + june + july + august + september + october + november + december;
+  
+  // Display annual summary
+  var annualSummaryDiv = document.getElementById("annualSummary");
+  annualSummaryDiv.innerHTML = "<h3 style='text-align: center;'>Annual Summary for " + year + "</h3>";
+  annualSummaryDiv.innerHTML += "<p style='text-align: center;'>Total: " + annualTotal.toFixed(2) + "</p>";
+});
+</script>
+
+</body>
+</html>
